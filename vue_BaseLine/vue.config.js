@@ -9,7 +9,7 @@ module.exports = {
 			},
 		},
 
-		port: process.env.VUE_APP_PORT || 3000,
+		port: process.env.VUE_APP_PORT || 4000,
 	},
 	outputDir: '../backend/public', // ② 배포 파일의 위치를 지정
 };
