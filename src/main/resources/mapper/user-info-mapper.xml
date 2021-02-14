@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ds.mapper.userInfoMapper">
+
+	<select id="getUserInfoList" resultType="com.ds.vo.userInfoVO">
+		SELECT *
+		FROM USERS
+	</select>
+</mapper>
