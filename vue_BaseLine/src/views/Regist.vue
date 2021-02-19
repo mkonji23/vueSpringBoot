@@ -2,7 +2,7 @@
 	<div style="margin-left:25px;">
 		<v-row>
 			<v-col cols="6" sm="3">
-				<v-text-field v-model="obj.userid" label="ID" outlined></v-text-field>
+				<v-text-field v-model="obj.userId" label="ID" outlined></v-text-field>
 			</v-col>
 		</v-row>
 		<v-row>
@@ -35,7 +35,7 @@ export default {
 	data() {
 		return {
 			obj: {
-				userid: '',
+				userId: '',
 				password: '',
 				name: '',
 				address: '',

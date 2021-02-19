@@ -25,7 +25,7 @@ const registStore = {
 		},
 		setRegistList: ({ commit }, payload) => {
 			http
-				.post('/api/regist', payload)
+				.post('/api/user/regist', payload)
 				.then(res => {
 					console.log(res);
 				})

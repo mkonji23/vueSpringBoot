@@ -10,4 +10,6 @@ import com.ds.vo.userInfoVO;
 @Mapper
 public interface userInfoMapper {
 	public List<userInfoVO> getUserInfoList();
+	
+	public int registUserInfo(userInfoVO user);
 }

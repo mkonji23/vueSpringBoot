@@ -83,7 +83,8 @@
 					</v-dialog>
 				</v-card-title>
 			</div>
-			<v-data-table :headers="headers" :items="dataList" :search="search">
+			{{ items }}
+			<v-data-table :headers="headers" :items="items" :search="search">
 				<template v-slot:item.actions="{ item }">
 					<v-icon small class="mr-2" @click="editItem(item)">
 						mdi-pencil
@@ -134,7 +135,7 @@ export default {
 					text: 'userId',
 					align: 'start',
 					sortable: false,
-					value: 'userid',
+					value: 'userId',
 				},
 				{ text: 'password', value: 'password' },
 				{ text: 'name', value: 'name' },
@@ -156,7 +157,7 @@ export default {
 	methods: {
 		...mapActions('registStore', ['getRegistList']),
 		callStore() {
-			this.getRegistList('?');
+			// this.getRegistList('?');
 			console.log('this.dataList', this.dataList);
 		},
 		// 조회
@@ -165,6 +166,7 @@ export default {
 				.get('/api/user/getList')
 				// .get('/user/userList/test')
 				.then(res => {
+					console.log(res);
 					this.items = res.data;
 					this.callStore();
 					this.snackbar = 'true';

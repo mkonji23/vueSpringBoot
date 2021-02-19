@@ -1,5 +1,7 @@
 package com.ds.vo;
 
+import java.sql.Date;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.Data;
@@ -14,8 +16,11 @@ import lombok.Setter;
 @Data
 @Alias("userInfoVO")
 public class userInfoVO {
-	 private String userid;
+	 private String userId;
 	 private String password;
 	 private String name;
 	 private String address;
+	 
+	 private Date createdTime;
+	 private Date updatedTime;
 }

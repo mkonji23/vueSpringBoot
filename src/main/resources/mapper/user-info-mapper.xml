@@ -4,6 +4,22 @@
 
 	<select id="getUserInfoList" resultType="com.ds.vo.userInfoVO">
 		SELECT *
-		FROM USERS
+		FROM YH_USER_MST
 	</select>
+	
+	<insert id="registUserInfo" parameterType="com.ds.vo.userInfoVO">
+	INSERT INTO YH_USER_MST(
+			USER_ID,
+			PASSWORD,
+			NAME,
+			ADDRESS
+		)
+		VALUES
+		(
+			 #{userId},
+			 #{password},
+			 #{name},
+			 #{address}
+	    );
+	</insert>
 </mapper>
