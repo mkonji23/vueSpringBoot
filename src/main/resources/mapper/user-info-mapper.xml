@@ -7,6 +7,12 @@
 		FROM YH_USER_MST
 	</select>
 	
+	<select id="getUserInfo" resultType="com.ds.vo.userInfoVO">
+		SELECT *
+		FROM YH_USER_MST
+		WHERE USER_ID = #{userId}
+	</select>
+	
 	<insert id="registUserInfo" parameterType="com.ds.vo.userInfoVO">
 	INSERT INTO YH_USER_MST(
 			USER_ID,

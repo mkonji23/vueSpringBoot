@@ -34,4 +34,9 @@ public class userInfoServiceImpl implements userInfoService {
 		return mapper.registUserInfo(user);
 	}
 
+	@Override
+	public userInfoVO getUserInfo(userInfoVO user) throws Exception {
+		return mapper.getUserInfo(user);
+	}
+
 }
