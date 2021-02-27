@@ -50,7 +50,9 @@ export default {
 		// 저장로직 콜
 		callRegist() {
 			console.log(this.obj);
-			this.setRegistList(this.obj);
+			this.setRegistList(this.obj).then(res => {
+				alert('저장 완료');
+			});
 		},
 		callStore() {
 			this.getRegistList('?');

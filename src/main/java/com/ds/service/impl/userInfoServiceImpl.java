@@ -39,4 +39,17 @@ public class userInfoServiceImpl implements userInfoService {
 		return mapper.getUserInfo(user);
 	}
 
+	@Override
+	public userInfoVO loginUser(userInfoVO user) throws Exception {
+		userInfoVO userInfo = mapper.loginUser(user);
+		String encodedPassword = userInfo.getPassword();
+		String rawPassword = user.getPassword();
+		// 비밀번호 일치여부
+		boolean flag =  passwordEncoder.matches(rawPassword, encodedPassword);
+		if(!flag) {
+			return null;
+		}
+		return userInfo;
+	}
+
 }

@@ -46,7 +46,9 @@
 									<v-card-actions>
 										<v-spacer></v-spacer>
 										<v-btn color="primary">Login</v-btn>
-										<v-btn color="indigo">Register</v-btn>
+										<v-btn color="indigo" @click="goPush('/regist')"
+											>Register</v-btn
+										>
 									</v-card-actions>
 								</v-card>
 							</v-col>
@@ -59,7 +61,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+	methods: {
+		goPush(route) {
+			this.$router.push(route).catch(() => {});
+		},
+	},
+};
 </script>
 
 <style></style>

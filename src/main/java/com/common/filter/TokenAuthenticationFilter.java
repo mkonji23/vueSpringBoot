@@ -42,9 +42,10 @@ public class TokenAuthenticationFilter  extends OncePerRequestFilter{
 				param.setUserId(userId);
 				userInfoVO member = userService.getUserInfo(param);
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(member,
-						member.getPassword());
+						member.getPassword(),null);
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-				authentication.setAuthenticated(true);
+				// 명시적으로 권한은 set할 수 없음 
+//				authentication.setAuthenticated(true);
 				log.info("authentication: {}", authentication);
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			} catch (UsernameNotFoundException e) {

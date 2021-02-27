@@ -11,4 +11,6 @@ public interface userInfoService {
 	int registUserInfo(userInfoVO user) throws Exception;
 	
 	userInfoVO getUserInfo(userInfoVO user) throws Exception;
+	
+	userInfoVO loginUser(userInfoVO user) throws Exception;
 }

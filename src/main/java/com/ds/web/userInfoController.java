@@ -30,16 +30,13 @@ public class userInfoController {
 	
 	@Autowired
  	private userInfoService userInfoService;
-
-	@Autowired
-    private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private AuthenticationTokenProvider tokenProvider;
 	
 	@ApiOperation(value="사용자 정보", notes ="사용자 정보를 조회합니다.")
 	@GetMapping(value="/getList")
-	public ResponseEntity<List<userInfoVO>> userInfo(@RequestParam userInfoVO user) throws Exception {
+	public ResponseEntity<List<userInfoVO>> userInfo(@RequestParam String userId) throws Exception {
 		List<userInfoVO> userList = new ArrayList<userInfoVO>();
 		userList = userInfoService.getUserInfoList();
 		log.info("abcdef");
@@ -57,10 +54,17 @@ public class userInfoController {
 	@ApiOperation(value="사용자 등록", notes ="사용자를 등록합니다.")
 	@PostMapping(value="/regist")
 	public ResponseEntity<userInfoVO> registUser(@RequestBody userInfoVO user) throws Exception {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		log.info("pawword: {}", user.getPassword());
 		int abcd = userInfoService.registUserInfo(user);
 		ApiResponseMessage msg = new ApiResponseMessage("200", "성공했다", null, null);
         return new ResponseEntity<userInfoVO>(user, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value="사용자 로그인", notes ="사용자를 로그인 및 토큰")
+	@PostMapping(value="/loginUser")
+	public ResponseEntity<userInfoVO> loginUser(@RequestBody userInfoVO user) throws Exception {
+		userInfoVO userInfo = userInfoService.loginUser(user);
+        return new ResponseEntity<userInfoVO>(userInfo, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value="토큰 발급받기", notes ="토큰을 발급합니다.")

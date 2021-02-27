@@ -28,4 +28,10 @@
 			 #{address}
 	    );
 	</insert>
+	
+	<select id="loginUser" parameterType="com.ds.vo.userInfoVO"  resultType="com.ds.vo.userInfoVO">
+			SELECT *
+			FROM YH_USER_MST
+			WHERE USER_ID = #{userId}
+	</select>
 </mapper>

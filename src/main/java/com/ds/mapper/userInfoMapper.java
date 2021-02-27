@@ -14,4 +14,6 @@ public interface userInfoMapper {
 	public userInfoVO getUserInfo(userInfoVO user);
 	
 	public int registUserInfo(userInfoVO user);
+	
+	public userInfoVO loginUser(userInfoVO user);
 }
