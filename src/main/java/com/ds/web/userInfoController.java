@@ -64,6 +64,12 @@ public class userInfoController {
 	@PostMapping(value="/loginUser")
 	public ResponseEntity<userInfoVO> loginUser(@RequestBody userInfoVO user) throws Exception {
 		userInfoVO userInfo = userInfoService.loginUser(user);
+		if(userInfo != null) {
+			AuthenticationToken tokenService = tokenProvider.issue(user.getUserId());
+			String token = "Bearer " + tokenService.getToken();
+			userInfo.setToken(token);
+		}
+		
         return new ResponseEntity<userInfoVO>(userInfo, HttpStatus.OK);
 	}
 	

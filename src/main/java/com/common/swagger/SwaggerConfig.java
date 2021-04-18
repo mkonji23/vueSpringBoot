@@ -1,4 +1,4 @@
-package com;
+package com.common.swagger;
 
 import java.util.ArrayList;
 import java.util.Arrays;

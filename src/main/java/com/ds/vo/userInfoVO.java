@@ -20,7 +20,7 @@ public class userInfoVO {
 	 private String password;
 	 private String name;
 	 private String address;
-	 
+	 private String token;
 	 private Date createdTime;
 	 private Date updatedTime;
 }
