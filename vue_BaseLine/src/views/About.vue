@@ -34,7 +34,6 @@ export default {
 				array.push({ label: i, children: this.makeChildArray(3) });
 			}
 			console.log(array);
-			return array;
 		},
 
 		makeChildArray(length) {

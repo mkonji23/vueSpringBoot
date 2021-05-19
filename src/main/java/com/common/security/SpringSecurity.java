@@ -35,8 +35,8 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
              .and()
          // 리소스 별 허용 범위 설정  
          .authorizeRequests()      
-             .antMatchers("/api/user/getList")
-                 .authenticated()
+//             .antMatchers("/api/user/getList")
+//             .authenticated()
              .anyRequest()
                  .permitAll()
              .and()

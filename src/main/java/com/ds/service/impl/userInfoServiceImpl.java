@@ -1,11 +1,11 @@
 package com.ds.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ds.mapper.userInfoMapper;
 import com.ds.service.userInfoService;
@@ -24,7 +24,7 @@ public class userInfoServiceImpl implements userInfoService {
     private PasswordEncoder passwordEncoder;
 	
 	@Override
-	public List<userInfoVO> getUserInfoList() throws Exception {
+	public List<Map<String,Object>> getUserInfoList() throws Exception {
 		return mapper.getUserInfoList();
 	}
 	
@@ -40,10 +40,10 @@ public class userInfoServiceImpl implements userInfoService {
 	}
 
 	@Override
-	public userInfoVO loginUser(userInfoVO user) throws Exception {
-		userInfoVO userInfo = mapper.loginUser(user);
-		String encodedPassword = userInfo.getPassword();
-		String rawPassword = user.getPassword();
+	public Map<String,Object> loginUser(Map<String,Object> map) throws Exception {
+		Map<String,Object> userInfo = mapper.loginUser(map);
+		String encodedPassword = (String) userInfo.get("password");
+		String rawPassword = (String) map.get("password");
 		// 비밀번호 일치여부
 		boolean flag =  passwordEncoder.matches(rawPassword, encodedPassword);
 		if(!flag) {

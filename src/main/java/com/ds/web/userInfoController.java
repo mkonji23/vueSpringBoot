@@ -1,12 +1,13 @@
 package com.ds.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,12 +37,11 @@ public class userInfoController {
 	
 	@ApiOperation(value="사용자 정보", notes ="사용자 정보를 조회합니다.")
 	@GetMapping(value="/getList")
-	public ResponseEntity<List<userInfoVO>> userInfo(@RequestParam String userId) throws Exception {
-		List<userInfoVO> userList = new ArrayList<userInfoVO>();
-		userList = userInfoService.getUserInfoList();
+	public ResponseEntity<List<Map<String,Object>>> userInfo() throws Exception {
+		List<Map<String,Object>> userList  = userInfoService.getUserInfoList();
 		log.info("abcdef");
 		ApiResponseMessage msg = new ApiResponseMessage("200", "성공했다", null, null);
-        return new ResponseEntity<List<userInfoVO>>(userList, HttpStatus.OK);
+        return new ResponseEntity<List<Map<String,Object>>>(userList, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/userList/test")
@@ -62,15 +62,21 @@ public class userInfoController {
 	
 	@ApiOperation(value="사용자 로그인", notes ="사용자를 로그인 및 토큰")
 	@PostMapping(value="/loginUser")
-	public ResponseEntity<userInfoVO> loginUser(@RequestBody userInfoVO user) throws Exception {
-		userInfoVO userInfo = userInfoService.loginUser(user);
+	public ResponseEntity<?> loginUser(
+			@RequestParam("userId") String userId, @RequestParam("password") String pwd
+			) throws Exception {
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("userId", userId);
+		param.put("password", pwd);
+		Map<String,Object> userInfo = userInfoService.loginUser(param);
 		if(userInfo != null) {
-			AuthenticationToken tokenService = tokenProvider.issue(user.getUserId());
+			AuthenticationToken tokenService = tokenProvider.issue(userId);
 			String token = "Bearer " + tokenService.getToken();
-			userInfo.setToken(token);
+//			userInfo.setToken(token);
+			userInfo.put("token", token);
 		}
 		
-        return new ResponseEntity<userInfoVO>(userInfo, HttpStatus.OK);
+        return new ResponseEntity<Map<String,Object>>(userInfo, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value="토큰 발급받기", notes ="토큰을 발급합니다.")
